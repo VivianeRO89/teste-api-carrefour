@@ -1,0 +1,40 @@
+meta {
+  name: Criar usuarios -  Maria
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://serverest.dev/usuarios
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "nome": "Maria Oliveira",
+      "email": "{{emailMaria}}",
+      "password": "123456",
+      "administrador": "true"
+    }
+  
+}
+
+script:pre-request {
+  const timestamp = Date.now();
+  
+  bru.setVar("emailMaria", `maria.oliveira${timestamp}@teste.com`);
+}
+
+tests {
+  const body = res.getBody();
+  
+  bru.setVar("idMaria", body._id);
+  
+  console.log("ID Maria:", body._id);
+    
+}

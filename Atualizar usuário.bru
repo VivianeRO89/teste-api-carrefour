@@ -1,0 +1,36 @@
+meta {
+  name: Atualizar usuário
+  type: http
+  seq: 7
+}
+
+put {
+  url: https://serverest.dev/usuarios/{{idMaria}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: nrf5lWZuQdcYmBMB
+}
+
+body:json {
+  {
+    "nome": "Maria Atualizado",
+    "email": "Maria1.atualizado@teste.com",
+    "password": "654321",
+    "administrador": "true"
+  }
+  
+}
+
+tests {
+  test("Usuário atualizado com sucesso", () => {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Mensagem de sucesso", () => {
+    const body = res.getBody();
+    expect(body.message).to.equal("Registro alterado com sucesso");
+  });
+}

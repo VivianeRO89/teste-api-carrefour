@@ -1,0 +1,43 @@
+meta {
+  name: Criar usuarios -  Carlos
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://serverest.dev/usuarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nome": "Carlos Santos",
+      "email": "{{emailCarlos}}",
+      "password": "123456",
+      "administrador": "true"
+    }
+}
+
+script:pre-request {
+  const timestamp = Date.now();
+  
+  bru.setVar(
+    "emailCarlos",
+    `Carlos.santos${timestamp}@teste.com`
+  );
+}
+
+tests {
+  const body = res.getBody();
+  
+  bru.setVar("idCarlos", body._id);
+  
+  console.log("ID Carlos:", body._id);
+    
+  
+  
+  
+  
+    
+}

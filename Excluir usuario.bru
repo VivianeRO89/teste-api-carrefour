@@ -1,0 +1,29 @@
+meta {
+  name: Excluir usuario
+  type: http
+  seq: 9
+}
+
+delete {
+  url: https://serverest.dev/usuarios/{{idMaria}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmlhLm9saXZlaXJhMTc4MzM0OTQzMTQ4M0B0ZXN0ZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc4MzM1MDI3NCwiZXhwIjoxNzgzMzUwODc0fQ.bZsyFEUWkzXqWXyPKThi51RN9s6s1l3TVKLoRasGiuo
+}
+
+tests {
+  test("Status code deve ser 200", () => {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Usuário removido com sucesso", () => {
+    const body = res.getBody();
+  
+    expect(body.message).to.equal(
+      "Registro excluído com sucesso"
+    );
+  });
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Listar usuários por ID
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://serverest.dev/usuarios/{{idMaria}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Status code deve ser 200", () => {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Deve retornar um usuário", () => {
+    const body = res.getBody();
+    expect(body._id).to.not.equal(undefined);
+    expect(body.nome).to.not.equal(undefined);
+    expect(body.email).to.not.equal(undefined);
+  });
+}

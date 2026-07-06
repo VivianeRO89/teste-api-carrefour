@@ -1,0 +1,30 @@
+meta {
+  name: Listar usuários
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://serverest.dev/usuarios
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Status code deve ser 200", () => {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Deve retornar usuários", () => {
+    const body = res.getBody();
+  
+    expect(body.quantidade).to.be.greaterThan(0);
+    expect(body.usuarios).to.not.equal(undefined);
+  });
+  
+  test("Quantidade deve ser igual ao total da lista", () => {
+    const body = res.getBody();
+  
+    expect(body.quantidade).to.equal(body.usuarios.length);
+  });
+}
